@@ -1,0 +1,17 @@
+[
+    {
+      "category": "crime",
+      "author": "fydor destokesky",
+      "book": "crime and punishment"
+    },
+    {
+      "category": "politics",
+      "author": "gorge orwell",
+      "book": "1984"
+    },
+    {
+      "category": "adventure",
+      "author": "arnest hemngi",
+      "book": "old man and sea"
+    }
+  ]
