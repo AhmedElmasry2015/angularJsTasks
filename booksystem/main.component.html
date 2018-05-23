@@ -1,30 +1,8 @@
-<!--
+
 <div class="container">
-        <table>
-            <tr>
-                <th>
-                    author
-                </th>
-                <th>
-                    book
-                </th>
-                <th>
-                    category
-                </th>
-               
-            </tr>
-            <tr ng-repeat="da in vm.data">
-             
-                <th>{{da.category}}</th>
-                <th>{{da.book}}</th>
-                <th>{{da.author}}</th>
-                </tr>
-                
-        </table>
-        
-</div>
--->
-<div class="container">
+    Search:<input type="text" ng-model="search" placeholder="Seacrh Items">
+    <button type="button" class="btn btn-success" ng-click="vm.showAdd=true" style="position: absolute;top:150px;right:100px">Add</button>
+
         <table>
             <tr>
                 <th>
@@ -36,17 +14,43 @@
                 <th>
                     Title
                 </th>
-               
+                <th>
+                    Delete
+                </th>
+                
+     
             </tr>
-            <!---->
-            <tr ng-repeat="da in vm.data |startFrom:(vm.currentPage-1)*vm.pageSize|limitTo:vm.pageSize">
+
+            <tr ng-repeat="da in vm.data |filter:search |startFrom:(vm.currentPage-1)*vm.pageSize|limitTo:vm.pageSize">
              
                 <th>{{da.author}}</th>
                 <th>{{da.country}}</th>
                 <th>{{da.title}}</th>
+                <th>
+                    <button type="button"  ng-click="vm.DeleteData(da)" class="btn btn-danger">Delete</button>
+                </th>
+                    
                 </tr>
                 
         </table>
-        <ul uib-pagination total-items="vm.data.length" ng-model="vm.currentPage" items-per-page="vm.pageSize"></ul>
+        
+    <div ng-show="vm.showAdd">
+            <h3>Add New Author</h3>
+            <form class="form-horizontal">
+                 <div class="form-group form-group-sm">
+                   <label class="col-sm-2 control-label" for="formGroupInputSmall">New data</label>
+                   <div class="col-sm-8">
+                        <input class="form-control" type="text" id="formGroupInputSmall" placeholder="Enter New Author" ng-model="vm.newAuthor">
+                        <input class="form-control" type="text" id="formGroupInputSmall" placeholder="Enter New book" ng-model="vm.book">
+                     <input class="form-control" type="text" id="formGroupInputSmall" placeholder="Enter New Country" ng-model="vm.category">
+                   </div>
+                   <!-- vm.newAuthor -->
+                   <div class="col-sm-2">
+                         <button type="submit" class="btn btn-success" ng-click="vm.addNew()">Add</button>
+                   </div>
+                 </div>
+             </form>
+        </div>
+         <ul uib-pagination total-items="vm.data.length" ng-model="vm.currentPage" items-per-page="vm.pageSize"></ul> 
 </div>
 

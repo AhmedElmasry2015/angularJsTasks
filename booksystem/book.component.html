@@ -1,18 +1,44 @@
 <h3>book component</h3>
 <div class="container">
+    
+        <label>Search:</label>
+        <input type="text" ng-model="search">
+        <button type="button" class="btn btn-success" ng-click="vm.showAdd=true" style="position: absolute;top:150px;right:100px">Add</button>
+
         <table>
             <tr>
                 <th>
                     book
                 </th>
+                <th>
+                    Delete
+                </th>
                
             </tr>
-            <tr ng-repeat="da in vm.data">
+            <tr ng-repeat="da in vm.data |startFrom:(vm.currentPage-1)*vm.pageSize|limitTo:vm.pageSize|filter:search ">
              
                 <th>{{da.title}}</th>
-            
-                </tr>
+                
+                <th><button type="button"  ng-click=" vm.DeleteData(da)" class="btn btn-danger">Delete</button></th>
+                
+            </tr>
                 
         </table>
-        
+        <div ng-show="vm.showAdd">
+                <h3>Add New Author</h3>
+                <form class="form-horizontal">
+                     <div class="form-group form-group-sm">
+                       <label class="col-sm-2 control-label" for="formGroupInputSmall">New book</label>
+                       <div class="col-sm-8">
+                         <input class="form-control" type="text" id="formGroupInputSmall" placeholder="Enter New book" ng-model="vm.newBook">
+                       </div>
+                       <!-- vm.newAuthor -->
+                       <div class="col-sm-2">
+                             <button type="submit" class="btn btn-success" ng-click="vm.addNew()">Add</button>
+                       </div>
+                     </div>
+                 </form>
+            </div>
+    
+    <ul uib-pagination total-items="vm.data.length" ng-model="vm.currentPage" items-per-page="vm.pageSize"></ul>
     </div>
