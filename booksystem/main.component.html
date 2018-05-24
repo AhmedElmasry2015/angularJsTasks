@@ -1,8 +1,14 @@
 
 <div class="container">
-    Search:<input type="text" ng-model="search" placeholder="Seacrh Items">
-    <button type="button" class="btn btn-success" ng-click="vm.showAdd=true" style="position: absolute;top:150px;right:100px">Add</button>
-
+        <div class="row">
+                <div class="search " style="margin-right:5px">
+                    <label>Search:</label>
+                    <input type="text" ng-model="search">
+               </div>
+                <button type="button" class="btn btn-success " ng-click="vm.showAdd=true" style="margin-right:5px; width:22%">Add</button>
+                <button type="button" ng-click="vm.hideAuthor=true;vm.hideInputUpdate=true"class="btn btn-info"style="margin-right:5px;width:22%">Edit</button>
+                <button type="button" ng-click="vm.hideAuthor=false;vm.hideInputUpdate=false"class="btn btn-info " style="margin-right:5px;width:22%" >Save</button>
+            </div>
         <table>
             <tr>
                 <th>
@@ -23,9 +29,33 @@
 
             <tr ng-repeat="da in vm.data |filter:search |startFrom:(vm.currentPage-1)*vm.pageSize|limitTo:vm.pageSize">
              
-                <th>{{da.author}}</th>
-                <th>{{da.country}}</th>
-                <th>{{da.title}}</th>
+                    <th>
+                            <div ng-hide="vm.hideAuthor" ng-model="da.author" >
+                                {{da.author}}
+                            </div>
+                        <div ng-show="vm.hideInputUpdate">
+                         <input class="form-control"  type="text" id="formGroupInputSmall" placeholder="Update Author" ng-model="da.author">
+                        </div>
+                    </th>
+                <!-- <th>{{da.author}}</th> -->
+                <!-- <th>{{da.country}}</th> -->
+                <th>
+                        <div ng-hide="vm.hideAuthor" ng-model="da.country" >
+                            {{da.country}}
+                        </div>
+                    <div ng-show="vm.hideInputUpdate">
+                     <input class="form-control"  type="text" id="formGroupInputSmall" placeholder="Update Country" ng-model="da.country">
+                    </div>
+                </th>
+                <!-- <th>{{da.title}}</th> -->
+                <th>
+                        <div ng-hide="vm.hideAuthor" ng-model="da.title" >
+                            {{da.title}}
+                        </div>
+                    <div ng-show="vm.hideInputUpdate">
+                     <input class="form-control"  type="text" id="formGroupInputSmall" placeholder="Update Title" ng-model="da.title">
+                    </div>
+                </th>
                 <th>
                     <button type="button"  ng-click="vm.DeleteData(da)" class="btn btn-danger">Delete</button>
                 </th>

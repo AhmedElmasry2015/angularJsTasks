@@ -1,26 +1,47 @@
 <div class="container">
-    <label>Search:</label>
-    <input type="text" ng-model="search">
-    <button type="button" class="btn btn-success" ng-click="vm.showAdd=true" style="position: absolute;top:150px;right:100px">Add</button>
-
+    <div class="row">
+        <div class="search " style="margin-right:5px">
+            <label>Search:</label>
+            <input type="text" ng-model="search">
+       </div>
+        <button type="button" class="btn btn-success " ng-click="vm.showAdd=true" style="margin-right:5px; width:22%">Add</button>
+        <button type="button" ng-click="vm.hideAuthor=true;vm.hideInputUpdate=true"class="btn btn-info"style="margin-right:5px;width:22%">Edit</button>
+        <button type="button" ng-click="vm.hideAuthor=false;vm.hideInputUpdate=false"class="btn btn-info " style="margin-right:5px;width:22%" >Save</button>
+    </div>
         <table>
             <tr>
                 <th>
                     author
                 </th>
                <th>Delete</th>
-               <th>Update</th>
             
             </tr>
             <tr ng-repeat="da in vm.data |filter:search| orderBy:'author' |startFrom:(vm.currentPage-1)*vm.pageSize|limitTo:vm.pageSize">
              
-                <th>{{da.author}}</th>
+                <th>
+                    <div ng-hide="vm.hideAuthor" ng-model="da.author" >
+                        {{da.author}}
+                    </div>
+                <div ng-show="vm.hideInputUpdate">
+                 <input class="form-control"  type="text" id="formGroupInputSmall" placeholder="Update Author" ng-model="da.author">
+                </div>
+                </th>
+                
                  <th><button type="button"  ng-click=" vm.DeleteData(da)" class="btn btn-danger">Delete</button></th> 
              
-                 <th><button type="button" class="btn btn-info" ng-model="showme">Update</button></th> 
+                 <!-- <th>
+                        <!-- vm.hideAuthor=true;vm.hideInputUpdate=false; -->
+                        <!-- ng-click="vm.updateAuthor(vm.hideAuthor,vm.hideInputUpdate)" -->
+<!--                         
+                     <button type="button" ng-click="vm.hideAuthor=true;vm.hideInputUpdate=true"class="btn btn-info">Edit</button>
+                     <button type="button" ng-click="vm.hideAuthor=false;vm.hideInputUpdate=false"class="btn btn-info">Update</button>
+                      
+
+                </th>  -->
                 </tr>
                 
         </table>
+        <!-- add new author-->
        <div ng-show="vm.showAdd">
            <h3>Add New Author</h3>
            <form class="form-horizontal">
@@ -36,5 +57,21 @@
                 </div>
             </form>
        </div>
+       <!-- update author-->
+       <div ng-show="vm.showUpdate">
+        <h3>update Author</h3>
+        <form class="form-horizontal">
+             <div class="form-group form-group-sm">
+               <label class="col-sm-3 control-label" for="formGroupInputSmall">update Author</label>
+               <div class="col-sm-9">
+                 <input class="form-control" type="text" id="formGroupInputSmall" placeholder="Enter New Author" ng-model="vm.updateUser">
+               </div>
+               <!-- vm.newAuthor -->
+               <!-- <div class="col-sm-2">
+                     <button type="submit" class="btn btn-success" ng-click="vm.addNew()">Add</button>
+               </div> -->
+             </div>
+         </form>
+    </div>
     <ul uib-pagination total-items="vm.data.length" ng-model="vm.currentPage" items-per-page="vm.pageSize"></ul> 
     </div>

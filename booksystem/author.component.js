@@ -32,9 +32,21 @@
       debugger;
       vm.data.push(newAuthor);
   }
-  // update User Data
-//   vm.updateRow=function(emp){
 
+  // update User Data
+//   vm.updateAuthor=function(hideAuthor,hideInputUpdate){
+//      if(hideAuthor ==false){
+//          debugger
+//          hideAuthor=true;
+//          hideInputUpdate=true;
+         
+//      }
+//      else{
+         
+//         hideAuthor=false;
+//         hideInputUpdate=false;
+//      }
 //   }
+
     });
 })();
